@@ -16,21 +16,17 @@ end
 
 shell_args = ARGV
 shell_args_length = shell_args.length
-ARGV.clear
 
-if shell_args_length >= 1 && File::exist?(shell_args[0]) == true
+if shell_args_length >= 2 && File::exist?(shell_args[0]) == true
     filename = shell_args[0]
+    subtext = shell_args[1]
 else
+    ARGV.clear
     puts "Input file name"
     filename = gets.chomp
     if File::exist?(filename) == false
         puts "The file '#{filename}' does not exist"; return
     end
-
-end
-if shell_args_length >= 2
-    subtext = shell_args[1]
-else
     puts "Input substring"
     subtext = gets.chomp
 end
