@@ -1,17 +1,22 @@
 def print_containing_subtext (filename, subtext)
-    linecount = 0
+    linecount = 1
+    anyfound = 0
     file = File::open(filename,  "r")
     for line in file.readlines do
         if line.include?(subtext) == true
             puts("#{linecount}: #{line}")
-            linecount+=1
+            anyfound+=1
         end
+        linecount+=1
+    end
+    if anyfound == 0
+        puts "No lines containing the substring '#{subtext}' have been found"
     end
 end
 
 shell_args = ARGV
 shell_args_length = shell_args.length
-puts shell_args[0]
+ARGV.clear
 
 if shell_args_length >= 1 && File::exist?(shell_args[0]) == true
     filename = shell_args[0]
@@ -21,8 +26,8 @@ else
     if File::exist?(filename) == false
         puts "The file '#{filename}' does not exist"; return
     end
-end
 
+end
 if shell_args_length >= 2
     subtext = shell_args[1]
 else
