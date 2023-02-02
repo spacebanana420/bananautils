@@ -9,12 +9,24 @@ def print_containing_subtext (filename, subtext)
     end
 end
 
-puts "Input file name"
-filename = gets.chomp
-if File::exist?(filename) == true
+shell_args = ARGV
+shell_args_length = shell_args.length
+puts shell_args[0]
+
+if shell_args_length >= 1 && File::exist?(shell_args[0]) == true
+    filename = shell_args[0]
+else
+    puts "Input file name"
+    filename = gets.chomp
+    if File::exist?(filename) == false
+        puts "The file '#{filename}' does not exist"; return
+    end
+end
+
+if shell_args_length >= 2
+    subtext = shell_args[1]
+else
     puts "Input substring"
     subtext = gets.chomp
-    print_containing_subtext(filename, subtext)
-else
-    puts "The file name '#{filename}' does not exist"
 end
+print_containing_subtext(filename, subtext)
