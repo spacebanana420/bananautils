@@ -52,13 +52,13 @@ else
     end
     mode = mode.to_i
     puts "Input password length"
-    gets passlength
+    passlength = gets.chomp
     case mode
     when 1
         puts passgen_ascii(passlength)
     when 2
         puts "Input dictionary file name"
-        gets dictname
+        dictname = gets.chomp
         puts passgen_dictionary(passlength, dictname)
     end
 end
