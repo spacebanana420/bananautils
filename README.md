@@ -9,14 +9,14 @@ All utilities were written in interpreted languages, and so they require the sam
 # Folders
 This project is divided by folders, each representing a category of tasks the programs do
 
-## File utils
+### File utils
 General file/directory manipulation, including copying, moving, compression, etc
 
-## Misc
+### Misc
 All utilities that are not included in any category
 
-## Security
+### Security
 Utilities related to security, passwords, encryption, etc
 
-## Shell
+### Shell
 All utilities written in Bash go in here
