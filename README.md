@@ -1,7 +1,9 @@
 # Banana Utils
 My collection of CLI utilities written in multiple languages
 
-This repository is newborn and as of now there are not many published utilities.
+This repository is newborn and as of now there are not many published utilities
+
+Most utilities are cross-platform, with the exception of the ones inside Shell, which are made for Linux and Unix/BSD-based systems
 
 # How to use
 All utilities were written in interpreted languages, and so they require the same interpreters to run. Install Lua, Ruby, Python and Bash to run the respective utilities.
