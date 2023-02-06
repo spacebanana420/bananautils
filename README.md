@@ -11,12 +11,18 @@ This project is divided by folders, each representing a category of tasks the pr
 
 ### File utils
 General file/directory manipulation, including copying, moving, compression, etc
+- **bananarchive.py:** Quick copying of project/code files for organized backup
+- **crystalflate.rb:** Deflate file compressor
 
 ### Misc
 All utilities that are not included in any category
+- **subcat.rb:** Prints out the lines of a text file that contain a specific string
 
 ### Security
 Utilities related to security, passwords, encryption, etc
+- **passgen.lua:** Old password generator, use passgen.rb instead
+- **passgen.rb:** ASCII and dictionary-based password generator
 
 ### Shell
 All utilities written in Bash go in here
+- **imagearchive2.sh:** - Shell script that transcodes images to archive and compress them efficiently
