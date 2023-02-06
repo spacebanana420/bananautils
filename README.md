@@ -25,4 +25,4 @@ Utilities related to security, passwords, encryption, etc
 
 ### Shell
 All utilities written in Bash go in here
-- **imagearchive2.sh:** - Shell script that transcodes images to archive and compress them efficiently
+- **imagearchive2.sh:** Shell script that transcodes images to archive and compress them efficiently
