@@ -65,12 +65,12 @@ end
 
 case mode
 when 1
-    puts passgen_ascii(passlength)
+    puts "Password: #{passgen_ascii(passlength)}"
 when 2
     if dictname == ""
         puts "Input dictionary file name"
         dictname = gets.chomp
     end
-    puts passgen_dictionary(passlength, dictname)
+    puts "Password: #{passgen_dictionary(passlength, dictname)}"
 end
 puts "Possible password combinations: #{calculate_entropy(passlength)}"
