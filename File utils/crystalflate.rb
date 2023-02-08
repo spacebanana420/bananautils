@@ -1,13 +1,36 @@
 require "zlib"
 
+def batch_control (operation, level)
+        files = Dir::entries(".")
+        for file in files
+            if File::file?(file) == true
+                if operation == 1
+                    deflate_file(file, level)
+                else
+                    inflate_file(file)
+                end
+            end
+        end
+end
+
 def deflate_file (filename, level)
-    if check_overwrite("#{filename}.cfl") == false
-        return
+    if filename != "batch" && filename != "all"
+        if check_overwrite("#{filename}.cfl") == false
+            return
+        end
+        input_file = File::read(filename)
+        output_file = Zlib::Deflate.deflate(input_file, level)
+        puts "#{filename} compressed"; puts "Original size: #{input_file.size}    Compressed size: #{output_file.size}"
+        File::write("#{filename}.cfl", output_file)
+    else
+        files = Dir::entries(".")
+        for file in files
+            input_file = File::read(filename)
+            output_file = Zlib::Deflate.deflate(input_file, level)
+            puts "#{filename} compressed"; puts "Original size: #{input_file.size}    Compressed size: #{output_file.size}"
+            File::write("#{filename}.cfl", output_file)
+        end
     end
-    input_file = File::read(filename)
-    output_file = Zlib::Deflate.deflate(input_file, level)
-    puts "#{filename} compressed"; puts "Original size: #{input_file.size}    Compressed size: #{output_file.size}"
-    File.write("#{filename}.cfl", output_file)
 end
 
 def inflate_file (filename)
@@ -17,7 +40,7 @@ def inflate_file (filename)
     end
     input_file = File::read(filename)
     output_file = Zlib::Inflate.inflate(input_file)
-    File.write(filename_noext, output_file)
+    File::write(filename_noext, output_file)
 end
 
 def get_compression_level ()
@@ -77,9 +100,11 @@ def remove_extension (filename, inextension)
 end
 
 print_dir()
-puts "Input file name"
+puts ""
+puts "Input file name (or type 'batch' or 'all' to choose all files)"
 filename = gets.chomp
-if File::exist?(filename) == true
+
+if filename != "batch" && filename != "all" && File::exist?(filename) == true
     puts "1. Compress    2. Decompress    3. Automatic (default)"
     puts "Choose an operation"
     operation = gets.chomp
@@ -88,17 +113,37 @@ if File::exist?(filename) == true
     else
         operation = operation.to_i
     end
-    if operation == 1
-        deflate_file(filename, get_compression_level())
-    elsif operation == 2
-        inflate_file(filename)
+elsif filename == "batch" || filename == "all"
+    puts "1. Compress    2. Decompress"
+    puts "Choose an operation"
+    operation = gets.chomp
+    if "12".include?(operation) == false
+        puts "You need to choose one of the available operations!"
+        return
     else
-        if filename.include?(".cfl") == false
-            deflate_file(filename, get_compression_level())
-        else
-            inflate_file(filename)
-        end
+        operation = operation.to_i
     end
 else
-    puts "The specified file does not exist"
+    puts "The specified file does not exist!"
+    return
+end
+
+if operation == 1
+    if filename == "batch" || filename == "all"
+        batch_control(operation, get_compression_level())
+    else
+        deflate_file(filename, get_compression_level())
+    end
+elsif operation == 2
+    if filename == "batch" || filename == "all"
+        batch_control(operation, 0)
+    else
+        inflate_file(filename)
+    end
+else
+    if filename.include?(".cfl") == false
+        deflate_file(filename, get_compression_level())
+    else
+        inflate_file(filename)
+    end
 end
