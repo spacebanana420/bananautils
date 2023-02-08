@@ -6,7 +6,7 @@ def deflate_file (filename, level)
     end
     input_file = File::read(filename)
     output_file = Zlib::Deflate.deflate(input_file, level)
-    puts "#{input_file} compressed"; puts "Original size: #{input_file.size}    Compressed size: #{output_file.size}"
+    puts "#{filename} compressed"; puts "Original size: #{input_file.size}    Compressed size: #{output_file.size}"
     File.write("#{filename}.cfl", output_file)
 end
 
