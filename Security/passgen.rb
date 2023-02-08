@@ -31,16 +31,23 @@ def passgen_dictionary(passlen, dictionaryname)
     return password
 end
 
+def calculate_entropy (length)
+    entropy = 94**length
+    return entropy
+end
+
+dictname = ""
 shell_args = ARGV
 shell_args_length = shell_args.length
 if shell_args_length >= 2
     if shell_args[0] == "ascii"
         mode = 1
-        puts passgen_ascii(shell_args[1])
     elsif shell_args[0] == "dict"
         mode = 2
-        puts passgen_dictionary(shell_args[1], shell_args[2])
+        dictname = shell_args[2]
     end
+    passlength = shell_args[1]
+    ARGV.clear
 else
     ARGV.clear
     puts "0. Exit     1. ASCII password     2. Dictionary password"
@@ -53,12 +60,16 @@ else
     mode = mode.to_i
     puts "Input password length"
     passlength = gets.chomp
-    case mode
-    when 1
-        puts passgen_ascii(passlength)
-    when 2
+end
+
+case mode
+when 1
+    puts passgen_ascii(passlength)
+when 2
+    if dictname == ""
         puts "Input dictionary file name"
         dictname = gets.chomp
-        puts passgen_dictionary(passlength, dictname)
     end
+    puts passgen_dictionary(passlength, dictname)
 end
+puts "Possible password combinations: #{calculate_entropy(passlength)}"
