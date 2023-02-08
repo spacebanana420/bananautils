@@ -37,6 +37,17 @@ def calculate_entropy (length)
     return entropy
 end
 
+def save_file (password)
+    if File::exist?("password.txt") == true
+        puts "The file 'password.txt' already exists, overwrite? (y/n)"
+        answer = gets.chomp
+        if answer != "y" && answer != "yes"
+            return
+        end
+    end
+    File::write("password.txt", password)
+end
+
 dictname = ""
 shell_args = ARGV
 shell_args_length = shell_args.length
@@ -66,12 +77,19 @@ end
 
 case mode
 when 1
-    puts "Password: #{passgen_ascii(passlength)}"
+    password = passgen_ascii(passlength)
+    puts "Password: #{password}"
 when 2
     if dictname == ""
         puts "Input dictionary file name"
         dictname = gets.chomp
     end
-    puts "Password: #{passgen_dictionary(passlength, dictname)}"
+    password = passgen_dictionary(passlength, dictname)
+    puts "Password: #{password}"
 end
 puts "Entropy: #{calculate_entropy(passlength)} bits"
+puts ""; puts "Save password to file? (y/n)"
+saveanswer = gets.chomp
+if saveanswer == "y" || saveanswer == "yes"
+    save_file(password)
+end
