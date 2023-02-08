@@ -33,6 +33,7 @@ end
 
 def calculate_entropy (length)
     entropy = 94**length
+    entropy = Math.log(entropy,2)
     return entropy
 end
 
@@ -73,4 +74,4 @@ when 2
     end
     puts "Password: #{passgen_dictionary(passlength, dictname)}"
 end
-puts "Possible password combinations: #{calculate_entropy(passlength)}"
+puts "Entropy: #{calculate_entropy(passlength)} bits"
