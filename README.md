@@ -3,7 +3,7 @@ My collection of CLI utilities written in multiple languages
 
 This repository is newborn and as of now there are not many published utilities
 
-Most utilities are cross-platform, with the exception of the ones inside Shell, which are made for Linux and Unix/BSD-based systems
+All programs are cross-platform, with the exception of bash scripts (shell folder) which do not run on Windows without WSL and might not work on other systems if dependencies are not satisfied
 
 # How to use
 All utilities were written in interpreted languages, and so they require the same interpreters to run. Install Lua, Ruby, Python and Bash to run the respective utilities.
