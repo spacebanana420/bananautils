@@ -1,6 +1,6 @@
 def passgen_ascii(passlen)
     password=""
-   for i in 0..passlen
+   for i in 0..passlen-1
         randomgen = Random.new
         character = randomgen.rand(33..127).chr
         password += character
@@ -51,7 +51,7 @@ if shell_args_length >= 2
 else
     ARGV.clear
     puts "0. Exit     1. ASCII password     2. Dictionary password"
-    puts "Choose a mode"; gets mode
+    puts "Choose a mode"; mode = gets.chomp
     numbers="012"
     if numbers.include?(mode) == false
         puts "You need to select one of the available modes!"
@@ -60,6 +60,7 @@ else
     mode = mode.to_i
     puts "Input password length"
     passlength = gets.chomp
+    passlength = passlength.to_i
 end
 
 case mode
