@@ -15,7 +15,7 @@ This project is divided by folders, each representing a category of tasks the pr
 General file/directory manipulation, including copying, moving, compression, etc
 - **bananarchive.py:** Quick copying of project/code files for organized backup
 - **crystalflate.rb:** Deflate file compressor and decompressor
-
+- **sizemeasure.rb:** Gives the total size a directory occupies, alongside each file inside
 ### Misc
 All utilities that are not included in any category
 - **subcat.rb:** Prints out the lines of a text file that contain a specific string
