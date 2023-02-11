@@ -11,7 +11,7 @@ def analyze_dir (new_dir)
             scaled_size, unit = scale_change(path_size)
             puts "File #{path}, size: #{scaled_size} #{unit}";
             total_size += path_size
-        elsif path.include?(".") == false && File::symlink?(path) == false
+        elsif Dir::exist?(path) == true && File::symlink?(path) == false
             path_size = analyze_dir(path)
             scaled_size, unit = scale_change(path_size)
             puts "Directory #{path}, size: #{scaled_size} #{unit}";
