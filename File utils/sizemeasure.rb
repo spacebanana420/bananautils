@@ -1,21 +1,26 @@
 def analyze_dir (new_dir)
     if new_dir != "."
+        #original_dir = Dir::getwd
         Dir::chdir(new_dir)
     end
     total_size = 0
-    paths = Dir::entries(".")
+    paths = Dir::children(".")
     for path in paths
         if File::file?(path) == true
             path_size = File::size(path)
             scaled_size, unit = scale_change(path_size)
             puts "File #{path}, size: #{scaled_size} #{unit}";
             total_size += path_size
-        elsif path != "." && path != ".."
+        elsif path.include?(".") == false && File::symlink?(path) == false
             path_size = analyze_dir(path)
             scaled_size, unit = scale_change(path_size)
             puts "Directory #{path}, size: #{scaled_size} #{unit}";
             total_size += path_size
         end
+    end
+    if new_dir != "."
+        #Dir::chdir(original_dir)
+        Dir::chdir("..")
     end
     return total_size
 end
